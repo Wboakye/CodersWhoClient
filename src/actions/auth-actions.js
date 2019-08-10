@@ -2,6 +2,8 @@ import axios from 'axios'
 
 import * as c from '../redux/constants'
 
+const host = 'http://localhost:3005';
+//const host = process.env.API_HOST;
 
 export function login(username, password) {
   return dispatch => {
@@ -44,7 +46,7 @@ function setUserToken(token) {
 }
 
 function callLoginApi(username, password, callback) {
-  axios.post('http://localhost:3005/api/user/login', {
+  axios.post(host + '/api/user/login', {
     username: username,
     password: password
   })
