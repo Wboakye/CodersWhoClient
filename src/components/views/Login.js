@@ -15,7 +15,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLock } from '@fortawesome/free-solid-svg-icons'
 
 import { connect } from 'react-redux'
-import { login } from '../../reducers/auth-reducer';
+import { login } from '../../actions/auth-actions';
 
 
 export class Login extends React.Component {
@@ -46,7 +46,6 @@ export class Login extends React.Component {
   render(){
     let {username, password} = this.state;
     let {isLoginPending, isLoginSuccess, loginError} = this.props;
-    console.log(this.props)
     return (
       
       <Container component="main" maxWidth="xs">
