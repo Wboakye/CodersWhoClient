@@ -24,6 +24,7 @@ export class Login extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  //STORES INPUT IN LOCAL STATE
   handleChange = (event) => {
     let value = event.target.value
     event.target.name === 'username' ? 
@@ -31,6 +32,7 @@ export class Login extends React.Component {
     this.setState({ password: value });
   }
 
+  //RETRIEVES INPUT FROM STATE, DISPATCHES LOGIN ACTION
   handleSubmit(e) {
     e.preventDefault();
     let { username, password } = this.state;
@@ -50,68 +52,72 @@ export class Login extends React.Component {
       <Container component="main" maxWidth="xs">
 
         <Box mt={8}>
-        <Paper className='p-5'>
-        <FontAwesomeIcon className="mb-3" style={{color: "#F40057"}}icon={faLock} size="4x" />
+          <Paper className='p-5'>
+            <div className='row'>
+              <div className="col text-center">
+                <FontAwesomeIcon className="mb-3" style={{color: "#4051B5"}} icon={faLock} size="4x" />
 
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <form onSubmit={this.handleSubmit}>
-            <TextField
-              onChange={this.handleChange}
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="username"
-              label="Username"
-              name="username"
-              autoComplete="username"
-              autoFocus
-            />
-            <TextField
-              onChange={this.handleChange}
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth 
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-              <div className="message">
-                { isLoginPending && <div>Please wait...</div> }
-                { isLoginSuccess && <div>Success.</div> }
-                { loginError && <div>{loginError.message}</div> }
+                <Typography component="h1" variant="h5">
+                  Sign in
+                </Typography>
               </div>
-            </Grid>
-          </form>
-        </Paper>
+            </div>
+            <form onSubmit={this.handleSubmit}>
+              <TextField
+                onChange={this.handleChange}
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
+                autoFocus
+              />
+              <TextField
+                onChange={this.handleChange}
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth 
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+              >
+                Sign In
+              </Button>
+              <Grid container>
+                {/* <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Forgot password?
+                  </Link>
+                </Grid> */}
+                <Grid item className="mt-1">
+                  <Link href="/register" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
+                <div className="message">
+                  { isLoginPending && <div>Please wait...</div> }
+                  { isLoginSuccess && <div>Success.</div> }
+                  { loginError && <div>{loginError.message}</div> }
+                </div>
+              </Grid>
+            </form>
+          </Paper>
         
         </Box>
       </Container>
