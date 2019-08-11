@@ -97,18 +97,18 @@ export default class SignUp extends React.Component {
     //IF INPUT IS FIRST PASSWORD, CHECKS THAT IT MATCHES REGEX
     if(event.target.name === 'password1'){
       if (this.state.password1 && !this.state.password1.match(passwordCheck)) {
-        this.setState({password1Error: true})
+        this.setState({password1Error: 'Password must contain: one lowercase, one uppercase, one numeric character, and be at least 6 characters in length.'})
       }else{
-        this.setState({password1Error: false})
+        this.setState({password1Error: ''})
       }
     }
 
     //IF INPUT IS SECOND PASSWORD, CHECKS THAT IT MATCHES FIRST PASSWORD
     if(event.target.name === 'password2'){
       if(this.state.password2 && this.state.password1 !== this.state.password2){
-        this.setState({password2Error: true})
+        this.setState({password2Error: 'Passwords do not match'})
       }else{
-        this.setState({password2Error: false})
+        this.setState({password2Error: ''})
       }
     }
   }
@@ -166,9 +166,10 @@ export default class SignUp extends React.Component {
                     required
                     fullWidth
                     id="username"
-                    label={this.state.usernameError ? this.state.usernameError : 'Username'}
+                    label='Username'
                     name="username"
                     autoComplete="username"
+                    helperText={this.state.usernameExists}
                     onBlur={this.checkExists}
                     onChange={this.handleChange}
                   />
@@ -180,9 +181,10 @@ export default class SignUp extends React.Component {
                     required
                     fullWidth
                     id="email"
-                    label={this.state.emailExists ||  this.state.emailError ? this.state.emailExists + this.state.emailError : 'Email Address'}
+                    label='Email Address'
                     name="email"
                     autoComplete="email"
+                    helperText={this.state.emailExists + this.state.emailError}
                     onBlur={this.handleEmail}
                     onChange={this.handleChange}
                   />
@@ -198,21 +200,23 @@ export default class SignUp extends React.Component {
                     type="password"
                     id="password1"
                     autoComplete="current-password"
+                    helperText={this.state.password1Error}
                     onBlur={this.validate}
                     onChange={this.handleChange}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    error={this.state.password2Error}
+                    error={this.state.password2Error ? true : false}
                     variant="outlined"
                     required
                     fullWidth
                     name="password2"
-                    label={this.state.password2Error ? 'Passwords do not match' : 'Re-enter password'}
+                    label='Re-enter password'
                     type="password"
                     id="password2"
                     autoComplete="current-password"
+                    helperText={this.state.password2Error}
                     onBlur={this.validate}
                     onChange={this.handleChange}
                   />
@@ -233,9 +237,6 @@ export default class SignUp extends React.Component {
                     Already have an account? Sign in
                   </Link>
                 </Grid>
-              </Grid>
-              <Grid item xs={12}>
-                <div className="error" style={{color: 'red', fontSize: '10'}}>{this.state.password1Error ? '*Password must contain: one lowercase letter, one uppercase letter, one numeric character, and be at least 6 characters in length.' : ''}</div>
               </Grid>
             </form>
           </Paper>
