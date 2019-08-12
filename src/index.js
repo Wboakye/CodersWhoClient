@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from './redux/store.js';
 import { Router, Route, Switch } from 'react-router';
@@ -10,9 +9,9 @@ import createHistory from 'history/createBrowserHistory';
 
 import Login from './components/views/Login'
 import Register from './components/views/Register'
+import Dashboard from './components/views/Dashboard'
 
-
-const history = createHistory();
+import history from './history'
 
 
 
@@ -20,9 +19,9 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
             <Switch>
-                <Route exact path="/" component={Login} />
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
+                <Route path="/" component={Dashboard} />
                 <Route path="/*" component={() => 'NOT FOUND'} />
             </Switch>
         </Router>

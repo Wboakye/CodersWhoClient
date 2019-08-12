@@ -37,15 +37,10 @@ export class Login extends React.Component {
     e.preventDefault();
     let { username, password } = this.state;
     this.props.login(username, password);
-    this.setState({
-      username: '',
-      password: ''
-    });
   }
 
 
   render(){
-    let {username, password} = this.state;
     let {isLoginPending, isLoginSuccess, loginError} = this.props;
     return (
       
