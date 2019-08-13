@@ -65,15 +65,10 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-let handleClick = () => {
-    store.dispatch(setSidebar(true));
-    console.log("Sidebar: " + store.getState().user.setSidebar)
-}
 
-export default function SearchAppBar() {
-  const classes = useStyles();
+export default function SearchAppBar(props) {
+    const classes = useStyles();
 
-  
 
   return (
     <div className={classes.root}>
@@ -84,9 +79,8 @@ export default function SearchAppBar() {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
-            onClick={handleClick()}
           >
-            <FontAwesomeIcon icon={faBars} />
+            < props.btn />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             Material-UI

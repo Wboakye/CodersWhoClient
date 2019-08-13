@@ -89,11 +89,11 @@ export default function Dashboard() {
     </div>
   );
 
-  
+  const toggleButton = () => (<FontAwesomeIcon onClick={toggleDrawer('left', true)} icon={faBars} />)
+
   return (
     <div>
-      < NavBar />
-      <Button onClick={toggleDrawer('left', true)}><FontAwesomeIcon icon={faBars} size="2x" /></Button>
+      < NavBar btn={toggleButton} />
       <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
         {sideList('left')}
       </Drawer>
