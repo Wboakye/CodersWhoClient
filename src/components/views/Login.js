@@ -1,4 +1,9 @@
 import React from 'react';
+
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+
+import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -15,11 +20,30 @@ import { faLock } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux'
 import { login, verifyLoggedIn } from '../../actions/auth-actions';
 
+const theme = createMuiTheme({
+  palette: {
+    type: 'light',
+    primary: {
+      light: '#3e3e45',
+      main: '#18181e',
+      dark: '#000000',
+      contrastText: '#ffffff',
+    },
+    secondary: {
+      light: '#add3db',
+      main: '#7da2a9',
+      dark: '#4f737a',
+      contrastText: '#000000',
+    },
+  },
+});
+
 
 export class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+    };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -38,7 +62,7 @@ export class Login extends React.Component {
     this.props.login(username, password);
   }
 
-  componentDidMount(){
+  componentWillMount(){
     this.props.verifyLoggedIn(true)
   }
 
@@ -47,76 +71,84 @@ export class Login extends React.Component {
     return (
       
       <Container component="main" maxWidth="xs">
+        <ThemeProvider theme={theme}>
+          <Box mt={8}>
+            <Fade
+            in={true}
+            {...({ timeout: 750 })}
+            >
+              <Paper className='p-5'>
+                <div className='row'>
+                  <div className="col text-center">
+                    <FontAwesomeIcon className="mb-3" style={{color: "#7da2a9"}} icon={faLock} size="4x" />
 
-        <Box mt={8}>
-          <Paper className='p-5'>
-            <div className='row'>
-              <div className="col text-center">
-                <FontAwesomeIcon className="mb-3" style={{color: "#4051B5"}} icon={faLock} size="4x" />
-
-                <Typography component="h1" variant="h5">
-                  Sign in
-                </Typography>
-              </div>
-            </div>
-            <form onSubmit={this.handleSubmit}>
-              <TextField
-                onChange={this.handleChange}
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="username"
-                label="Username"
-                name="username"
-                autoComplete="username"
-                autoFocus
-              />
-              <TextField
-                onChange={this.handleChange}
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth 
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-              >
-                Sign In
-              </Button>
-              <Grid container>
-                {/* <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid> */}
-                <Grid item className="mt-1">
-                  <Link href="/register" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
-                <div className="message">
-                  { isLoginPending && <div>Please wait...</div> }
-                  { isLoginSuccess && <div>Success.</div> }
-                  { loginError && <div>{loginError.message}</div> }
+                    <Typography component="h1" variant="h5">
+                      Sign in
+                    </Typography>
+                  </div>
                 </div>
-              </Grid>
-            </form>
-          </Paper>
-        
-        </Box>
+                <form onSubmit={this.handleSubmit}>
+                  <TextField
+                    onChange={this.handleChange}
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="username"
+                    label="Username"
+                    name="username"
+                    color="secondary"
+
+                    autoComplete="username"
+                    autoFocus
+                  />
+                  <TextField
+                    onChange={this.handleChange}
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth 
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    color="secondary"
+                    autoComplete="current-password"
+                  />
+                  <FormControlLabel
+                    control={<Checkbox value="remember" color="primary" />}
+                    label="Remember me"
+                  />
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="secondary"
+                  >
+                    Sign In
+                  </Button>
+                  <Grid container>
+                    {/* <Grid item xs>
+                      <Link href="#" variant="body2">
+                        Forgot password?
+                      </Link>
+                    </Grid> */}
+                    <Grid item className="mt-1">
+                      <Link href="/register" variant="body2">
+                        {"Don't have an account? Sign Up"}
+                      </Link>
+                    </Grid>
+                    <div className="message">
+                      { isLoginPending && <div>Please wait...</div> }
+                      { isLoginSuccess && <div>Success.</div> }
+                      { loginError && <div>{loginError.message}</div> }
+                    </div>
+                  </Grid>
+                </form>
+              </Paper>
+            </Fade>
+          </Box>
+        </ThemeProvider>
       </Container>
     );
   }

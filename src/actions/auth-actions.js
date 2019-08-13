@@ -44,10 +44,17 @@ export function logout(){
   }
 }
 
+export function setLogged(input){
+  return dispatch => {
+    dispatch(setLoginSuccess(input));
+  }
+}
+
+
+
 //VERIFY THAT A USER IS LOGGED IN
 export function verifyLoggedIn(redirect){
-  console.log("Login authenticating")
-  if(store.getState().isLoginSuccess){
+  if(store.getState().auth.isLoginSuccess){
     if(redirect){
           history.push('/dashboard');
         }
@@ -63,7 +70,6 @@ export function verifyLoggedIn(redirect){
         },
       }).then( (response) => {
         store.dispatch(setLoginSuccess(true));
-        console.log("Authenticated")
         if(redirect){
           history.push('/dashboard');
         }
@@ -71,11 +77,9 @@ export function verifyLoggedIn(redirect){
       })
       .catch(function (error) {
         alert(error);
-        console.log("Not authenticated")
         return false
       });
     }else{
-      console.log("Not authenticated")
       return false
     }
   }

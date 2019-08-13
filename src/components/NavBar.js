@@ -1,4 +1,7 @@
 import React from 'react';
+
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 //import IconButton from '@material-ui/core/IconButton';
@@ -62,6 +65,24 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark',
+    primary: {
+      light: '#3e3e45',
+      main: '#18181e',
+      dark: '#000000',
+      contrastText: '#ffffff',
+    },
+    secondary: {
+      light: '#add3db',
+      main: '#7da2a9',
+      dark: '#4f737a',
+      contrastText: '#000000',
+    },
+  },
+});
+
 
 export default function SearchAppBar(props) {
     const classes = useStyles();
@@ -69,7 +90,8 @@ export default function SearchAppBar(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <ThemeProvider theme={theme}>
+      <AppBar color="primary" position="static">
         <Toolbar>
             < props.btn />
           <Typography className={classes.title} variant="h6" noWrap>
@@ -90,6 +112,7 @@ export default function SearchAppBar(props) {
           </div>
         </Toolbar>
       </AppBar>
+      </ThemeProvider>
     </div>
   );
 }

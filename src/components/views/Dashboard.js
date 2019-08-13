@@ -9,6 +9,9 @@ import { logout } from '../../actions/auth-actions';
 import NavBar from '../NavBar';
 import { Home } from './Home';
 
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+
 import IconButton from '@material-ui/core/IconButton';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -32,10 +35,29 @@ const useStyles = makeStyles({
   },
 });
 
+const theme = createMuiTheme({
+  palette: {
+    type: 'light',
+    primary: {
+      light: '#3e3e45',
+      main: '#18181e',
+      dark: '#000000',
+      contrastText: '#ffffff',
+    },
+    secondary: {
+      light: '#add3db',
+      main: '#7da2a9',
+      dark: '#4f737a',
+      contrastText: '#000000',
+    },
+  },
+});
+//COMPONENT START 
 export default function Dashboard() {
   const classes = useStyles();
   const [state, setState] = React.useState({
     left: false,
+
   });
 
   const toggleDrawer = (side, open) => event => {
@@ -102,20 +124,21 @@ export default function Dashboard() {
 
   return (
     <div>
-      < NavBar btn={toggleButton} />
-      <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
-        {sideList('left')}
-      </Drawer>
-      <Provider store={store}>
-        <Router history={history}>
-            <Switch>
-                <Route path="/" component={Home} />
-                <Route path="/*" component={() => 'NOT FOUND'} />
-            </Switch>
-        </Router>
-    </Provider>
+        <ThemeProvider theme={theme}>
+          < NavBar color="primary" btn={toggleButton} />
+          <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
+            {sideList('left')}
+          </Drawer>
+          <Provider store={store}>
+            <Router history={history}>
+                <Switch>
+                    <Route path="/" component={Home} />
+                    <Route path="/*" component={() => 'NOT FOUND'} />
+                </Switch>
+            </Router>
+        </Provider>
+      </ThemeProvider>
     </div>
   );
 }
 
-//TO DO: ACCEPT DASHBOARD VARIABLE FROM STATE, CHANGE CLOSE DRAWER
