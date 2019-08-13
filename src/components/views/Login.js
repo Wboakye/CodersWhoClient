@@ -1,5 +1,4 @@
 import React from 'react';
-import history from '../../history'
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';

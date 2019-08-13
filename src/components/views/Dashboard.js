@@ -9,17 +9,17 @@ import { logout } from '../../actions/auth-actions';
 import NavBar from '../NavBar';
 import { Home } from './Home';
 
-
+import IconButton from '@material-ui/core/IconButton';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
+//import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import { faEnvelope, faChevronLeft, faChevronRight, faBars, faMailBulk, faSignOutAlt} from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faBars, faMailBulk, faSignOutAlt} from '@fortawesome/free-solid-svg-icons'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -89,7 +89,16 @@ export default function Dashboard() {
     </div>
   );
 
-  const toggleButton = () => (<FontAwesomeIcon onClick={toggleDrawer('left', true)} icon={faBars} />)
+  const toggleButton = () => (
+  <IconButton
+    edge="start"
+    className={classes.menuButton}
+    color="inherit"
+    aria-label="open drawer"
+    onClick={toggleDrawer('left', true)} 
+  >
+    <FontAwesomeIcon icon={faBars} />
+  </IconButton>)
 
   return (
     <div>

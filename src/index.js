@@ -5,7 +5,6 @@ import * as serviceWorker from './serviceWorker';
 import store from './redux/store.js';
 import { Router, Route, Switch } from 'react-router';
 import { Provider } from 'react-redux';
-import createHistory from 'history/createBrowserHistory';
 
 import Login from './components/views/Login'
 import Register from './components/views/Register'
@@ -33,3 +32,6 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+
+//TODO: Get page auth working. Fix auth function in actions.

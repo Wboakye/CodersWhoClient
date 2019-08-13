@@ -5,7 +5,7 @@ import history from '../history'
 import * as c from '../redux/constants'
 import store from '../redux/store'
 
-const host = 'http://localhost:3005';
+//const host = 'http://localhost:3005';
 //const host = process.env.API_HOST;
 
 
