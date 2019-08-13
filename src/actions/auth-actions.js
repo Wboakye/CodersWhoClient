@@ -44,11 +44,40 @@ export function logout(){
   }
 }
 
-export function verifyLoggedIn(){
-  if(!store.getState().isLoginSuccess === true ){
-    return false
-  }else{
+//VERIFY THAT A USER IS LOGGED IN
+export function verifyLoggedIn(redirect){
+  console.log("Login authenticating")
+  if(store.getState().isLoginSuccess){
+    if(redirect){
+          history.push('/dashboard');
+        }
     return true
+  }else{
+    if(sessionStorage.getItem('CWJWT')){
+      let token = sessionStorage.getItem('CWJWT');
+      axios({
+        url: host + '/api/user/authenticate',
+        method: 'POST',
+        headers: {
+          'auth-token': token,
+        },
+      }).then( (response) => {
+        store.dispatch(setLoginSuccess(true));
+        console.log("Authenticated")
+        if(redirect){
+          history.push('/dashboard');
+        }
+        return true
+      })
+      .catch(function (error) {
+        alert(error);
+        console.log("Not authenticated")
+        return false
+      });
+    }else{
+      console.log("Not authenticated")
+      return false
+    }
   }
 }
 

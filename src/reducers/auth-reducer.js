@@ -5,7 +5,6 @@ export default function reducer(state = {
   isLoginPending: false,
   loginError: null,
   token: null,
-  userInfo: {}
 }, action) {
   switch (action.type) {
     case c.SET_LOGIN_PENDING:

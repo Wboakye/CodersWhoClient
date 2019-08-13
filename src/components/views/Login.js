@@ -1,5 +1,5 @@
 import React from 'react';
-
+import history from '../../history'
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -14,7 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLock } from '@fortawesome/free-solid-svg-icons'
 
 import { connect } from 'react-redux'
-import { login } from '../../actions/auth-actions';
+import { login, verifyLoggedIn } from '../../actions/auth-actions';
 
 
 export class Login extends React.Component {
@@ -39,6 +39,9 @@ export class Login extends React.Component {
     this.props.login(username, password);
   }
 
+  componentDidMount(){
+    this.props.verifyLoggedIn(true)
+  }
 
   render(){
     let {isLoginPending, isLoginSuccess, loginError} = this.props;
@@ -130,7 +133,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    login: (username, password) => dispatch(login(username, password))
+    login: (username, password) => dispatch(login(username, password)),
+    verifyLoggedIn
   };
 }
 
