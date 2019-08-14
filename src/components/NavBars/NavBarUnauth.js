@@ -95,7 +95,7 @@ export default function SearchAppBar(props) {
         <Toolbar>
             < props.btn />
           <Typography className={classes.title} variant="h6" noWrap>
-            <div className="ml-3">CODERS WHO</div>
+          < div className='ml-3'><b>CODERS WHO...</b></div>
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>

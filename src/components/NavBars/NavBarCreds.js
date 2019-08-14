@@ -94,7 +94,7 @@ export default function SearchAppBar(props) {
       <AppBar color="primary" position="static">
         <Toolbar>
           <Typography variant="h6" color="inherit">
-            <div className="ml-3">CODERS WHO</div>
+            <div className='ml-3'><b>CODERS WHO...</b></div>
           </Typography>
         </Toolbar>
       </AppBar>
