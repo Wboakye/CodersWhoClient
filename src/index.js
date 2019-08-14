@@ -9,9 +9,10 @@ import {PrivateRoute} from './components/PrivateRoute'
 
 import { verifyLoggedIn } from './actions/auth-actions' 
 
-import Login from './components/views/Login'
-import Register from './components/views/Register'
-import Dashboard from './components/views/Dashboard'
+import Login from './components/views/Unauth/Login'
+import Register from './components/views/Unauth/Register'
+import Dashboard from './components/views/Auth/Dashboard'
+import DashboardUnauth from './components/views/Unauth/DashboardUnauth'
 
 import history from './history'
 
@@ -33,7 +34,8 @@ class Main extends React.Component {
                 <Switch>
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
-                    <PrivateRoute path="/" component={Dashboard} />
+                    <PrivateRoute path="/user" component={Dashboard} />
+                    <Route path="/" component={DashboardUnauth} />
                     <Route path="/*" component={() => 'NOT FOUND'} />
                 </Switch>
             </Router>

@@ -23,7 +23,7 @@ export function login(username, password) {
         if(data.success === true){
           dispatch(setUserToken(data.token));
           dispatch(setLoginSuccess(true));
-          history.push('/dashboard');
+          history.push('/user');
         }else{
           dispatch(setLoginError(data.message));
           alert(data.message);
@@ -56,7 +56,7 @@ export function setLogged(input){
 export function verifyLoggedIn(redirect){
   if(store.getState().auth.isLoginSuccess){
     if(redirect){
-          history.push('/dashboard');
+          history.push('/user');
         }
     return true
   }else{
@@ -71,7 +71,7 @@ export function verifyLoggedIn(redirect){
       }).then( (response) => {
         store.dispatch(setLoginSuccess(true));
         if(redirect){
-          history.push('/dashboard');
+          history.push('/user');
         }
         return true
       })
