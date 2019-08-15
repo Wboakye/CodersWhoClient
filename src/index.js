@@ -7,6 +7,8 @@ import { Router, Route, Switch } from 'react-router';
 import { Provider, connect } from 'react-redux';
 import {PrivateRoute} from './components/PrivateRoute'
 
+import io from 'socket.io-client'
+
 import { verifyLoggedIn } from './actions/auth-actions' 
 
 import Login from './components/views/Unauth/Login'
@@ -16,6 +18,7 @@ import DashboardUnauth from './components/views/Unauth/DashboardUnauth'
 
 import history from './history'
 
+let socket = io.connect('http://localhost:80');
 const host = 'http://localhost:3005';
 
 
@@ -25,6 +28,11 @@ class Main extends React.Component {
         this.state={
             
         }
+    }
+    componentDidMount(){
+
+    socket.on('broadcast', function (data) {
+        console.log(data);});
     }
 
 
