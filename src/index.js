@@ -35,6 +35,10 @@ class Main extends React.Component {
         console.log(data);});
     }
 
+    componentWillUnmount(){
+        socket.emit('end');
+    }
+
 
     render(){
         return(<Provider store={store}>
