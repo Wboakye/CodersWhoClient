@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import NavBar from '../../NavBars/NavBarCreds'
+import NavBar from '../../navbars/NavBarCreds'
 
 import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
@@ -20,24 +19,8 @@ import { faLock } from '@fortawesome/free-solid-svg-icons'
 
 import { connect } from 'react-redux'
 import { login, verifyLoggedIn } from '../../../actions/auth-actions';
+import { theme } from '../../theme'
 
-const theme = createMuiTheme({
-  palette: {
-    type: 'light',
-    primary: {
-      light: '#3e3e45',
-      main: '#18181e',
-      dark: '#000000',
-      contrastText: '#ffffff',
-    },
-    secondary: {
-      light: '#add3db',
-      main: '#7da2a9',
-      dark: '#4f737a',
-      contrastText: '#000000',
-    },
-  },
-});
 
 
 export class Login extends React.Component {

@@ -5,14 +5,12 @@ import { Provider } from 'react-redux';
 
 import store from '../../../redux/store';
 import history from '../../../history';
-import { logout } from '../../../actions/auth-actions';
 
-import NavBarUnauth from '../../NavBars/NavBarUnauth';
+import { theme } from '../../theme'
+import NavBarUnauth from '../../navbars/NavBarUnauth';
 import { HomeUnauth } from './HomeUnauth';
 
-import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-
 import IconButton from '@material-ui/core/IconButton';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -24,7 +22,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
 import { faEnvelope, faBars, faMailBulk, faSignOutAlt} from '@fortawesome/free-solid-svg-icons'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const useStyles = makeStyles({
@@ -36,23 +33,7 @@ const useStyles = makeStyles({
   },
 });
 
-const theme = createMuiTheme({
-  palette: {
-    type: 'light',
-    primary: {
-      light: '#3e3e45',
-      main: '#18181e',
-      dark: '#000000',
-      contrastText: '#ffffff',
-    },
-    secondary: {
-      light: '#add3db',
-      main: '#7da2a9',
-      dark: '#4f737a',
-      contrastText: '#000000',
-    },
-  },
-});
+
 //COMPONENT START 
 export default function DashboardUnauth() {
   const classes = useStyles();

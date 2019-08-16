@@ -1,10 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 
-import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
-import NavBar from '../../NavBars/NavBarCreds'
+import NavBar from '../../navbars/NavBarCreds'
+import { theme } from '../../theme'
 
 import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
@@ -25,25 +25,6 @@ require('dotenv/config');
 
 const host = 'http://localhost:3005'
 //const host = process.env.API_HOST;
-console.log('local host ' + host)
-
-const theme = createMuiTheme({
-  palette: {
-    type: 'light',
-    primary: {
-      light: '#3e3e45',
-      main: '#18181e',
-      dark: '#000000',
-      contrastText: '#ffffff',
-    },
-    secondary: {
-      light: '#add3db',
-      main: '#7da2a9',
-      dark: '#4f737a',
-      contrastText: '#000000',
-    },
-  },
-});
 
 
 class SignUp extends React.Component {

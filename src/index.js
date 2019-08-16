@@ -19,7 +19,7 @@ import DashboardUnauth from './components/views/Unauth/DashboardUnauth'
 import history from './history'
 
 let socket = io.connect('http://localhost:80');
-const host = 'http://localhost:3005';
+//const host = 'http://localhost:3005';
 
 
 class Main extends React.Component {
@@ -29,10 +29,11 @@ class Main extends React.Component {
             
         }
     }
-    componentDidMount(){
 
-    socket.on('broadcast', function (data) {
-        console.log(data);});
+    componentDidMount(){
+        socket.on('broadcast', function (data) {
+            console.log(data);
+        });
     }
 
     componentWillUnmount(){

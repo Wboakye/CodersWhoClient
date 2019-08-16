@@ -1,16 +1,15 @@
 import React from 'react';
 
-import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-//import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faSearch } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { theme } from '../theme'
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -65,23 +64,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const theme = createMuiTheme({
-  palette: {
-    type: 'dark',
-    primary: {
-      light: '#3e3e45',
-      main: '#18181e',
-      dark: '#000000',
-      contrastText: '#ffffff',
-    },
-    secondary: {
-      light: '#add3db',
-      main: '#7da2a9',
-      dark: '#4f737a',
-      contrastText: '#000000',
-    },
-  },
-});
 
 
 export default function SearchAppBar(props) {
@@ -94,7 +76,7 @@ export default function SearchAppBar(props) {
       <AppBar color="primary" position="static">
         <Toolbar>
           <Typography variant="h6" color="inherit">
-            <div className='ml-3'><b>CODERS WHO...</b></div>
+            <div className='ml-3'><b>Digital Ticker</b></div>
           </Typography>
         </Toolbar>
       </AppBar>
