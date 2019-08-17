@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, Switch } from 'react-router';
+import { Router, Route, Switch, withRouter } from 'react-router';
 import { Link } from 'react-router-dom'
 import { Provider } from 'react-redux';
 
@@ -8,7 +8,15 @@ import history from '../../../history';
 
 import { theme } from '../../theme'
 import NavBarUnauth from '../../navbars/NavBarUnauth';
+
 import { HomeUnauth } from './HomeUnauth';
+import NewsTicker from '../../NewsTicker'
+import CryptoNews from './NewsPages/CryptoNews'
+import BitcoinlNews from './NewsPages/Bitcoin'
+import DogecoinNews from './NewsPages/Dogecoin'
+import EthereumNews from './NewsPages/Ethereum'
+import LitecoinNews from './NewsPages/Litecoin'
+import RippleNews from './NewsPages/Ripple'
 
 import { ThemeProvider } from '@material-ui/styles';
 import IconButton from '@material-ui/core/IconButton';
@@ -21,7 +29,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import { faEnvelope, faBars, faMailBulk, faSignOutAlt} from '@fortawesome/free-solid-svg-icons'
+import { faHome, faBars, faSignInAlt, faSearchDollar} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const useStyles = makeStyles({
@@ -35,7 +43,7 @@ const useStyles = makeStyles({
 
 
 //COMPONENT START 
-export default function DashboardUnauth() {
+function DashboardUnauth() {
   const classes = useStyles();
   const [state, setState] = React.useState({
     left: false,
@@ -58,37 +66,84 @@ export default function DashboardUnauth() {
       onClick={toggleDrawer(side, false)}
       onKeyDown={toggleDrawer(side, false)}
     >
-  
-  
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <FontAwesomeIcon icon={faMailBulk} /> : <FontAwesomeIcon icon={faEnvelope} />}</ListItemIcon>
-            <ListItemText primary={text} />
+        <ListItem>
+            <ListItemText primary={<h4><b>Digital Ticker</b></h4>}/>
           </ListItem>
-        ))}
-      </List>
-      <Divider />
+        </List>
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <FontAwesomeIcon icon={faMailBulk} /> : <FontAwesomeIcon icon={faEnvelope} />}</ListItemIcon>
-            <ListItemText primary={text} />
+      <Divider />
+      <Link to="/" style={{ textDecoration: 'none', color: 'black' }}>
+          <ListItem button>
+              <ListItemIcon>
+              <FontAwesomeIcon icon={faHome} />
+              </ListItemIcon>
+              <ListItemText primary={'Home'} />
           </ListItem>
-        ))}
-      </List>
+        </Link>
+        <Link to="/login" style={{ textDecoration: 'none', color: 'black' }}>
+          <ListItem button>
+              <ListItemIcon>
+              <FontAwesomeIcon icon={faSignInAlt} />
+              </ListItemIcon>
+              <ListItemText style={{textDecoration: 'none'}} primary={'Sign In'} />
+          </ListItem>
+        </Link>
       <Divider />
-
-      <List>
-        <Link to="/login">
-            <ListItem button>
-                <ListItemIcon>
-                <FontAwesomeIcon icon={faSignOutAlt} />
-                </ListItemIcon>
-                <ListItemText primary={'Sign In'} />
-            </ListItem>
+        <ListItem>
+          <ListItemText primary={<b>News</b>}/>
+        </ListItem>
+        <Divider />
+        <Link to="/news/general" style={{ textDecoration: 'none', color: 'black' }}>
+          <ListItem button>
+              <ListItemIcon>
+              <FontAwesomeIcon icon={faSearchDollar} />
+              </ListItemIcon>
+              <ListItemText primary={'Crypto'} />
+          </ListItem>
+        </Link>
+        <Link to="/news/bitcoin" style={{ textDecoration: 'none', color: 'black' }}>
+          <ListItem button>
+              <ListItemIcon>
+              <FontAwesomeIcon icon={faSearchDollar} />
+              </ListItemIcon>
+              <ListItemText primary={'Bitcoin'} />
+          </ListItem>
+        </Link>
+        <Link to="/news/dogecoin" style={{ textDecoration: 'none', color: 'black' }}>
+          <ListItem button>
+              <ListItemIcon>
+              <FontAwesomeIcon icon={faSearchDollar} />
+              </ListItemIcon>
+              <ListItemText primary={'Dogecoin'} />
+          </ListItem>
+        </Link>
+        <Link to="/news/ethereum" style={{ textDecoration: 'none', color: 'black' }}>
+          <ListItem button>
+              <ListItemIcon>
+              <FontAwesomeIcon icon={faSearchDollar} />
+              </ListItemIcon>
+              <ListItemText primary={'Ethereum'} />
+          </ListItem>
+        </Link>
+        <Link to="/news/litecoin" style={{ textDecoration: 'none', color: 'black' }}>
+          <ListItem button>
+              <ListItemIcon>
+              <FontAwesomeIcon icon={faSearchDollar} />
+              </ListItemIcon>
+              <ListItemText primary={'Litecoin'} />
+          </ListItem>
+        </Link>
+        <Link to="/news/ripple" style={{ textDecoration: 'none', color: 'black' }}>
+          <ListItem button>
+              <ListItemIcon>
+              <FontAwesomeIcon icon={faSearchDollar} />
+              </ListItemIcon>
+              <ListItemText primary={'Ripple'} />
+          </ListItem>
         </Link>
       </List>
+      <Divider />
     </div>
   );
 
@@ -113,13 +168,17 @@ export default function DashboardUnauth() {
           <Provider store={store}>
             <Router history={history}>
                 <Switch>
-                    <Route path="/" component={HomeUnauth} />
+                    <Route exact path="/" component={HomeUnauth} />
+                    <Route path="/news/:subject" component={CryptoNews} />
                     <Route path="/*" component={() => 'NOT FOUND'} />
                 </Switch>
             </Router>
         </Provider>
+        < NewsTicker />
       </ThemeProvider>
     </div>
   );
 }
+
+export default withRouter(DashboardUnauth);
 
