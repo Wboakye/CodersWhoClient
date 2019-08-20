@@ -14,12 +14,12 @@ export default class CryptoNews extends Component {
     constructor(){
         super();
         this.state = {
-            subject: '',
             fade: false,
             articles:[]
         }
     }
 
+    //Updates component when new params are input
     componentDidUpdate(prevProps) {
         const { match: { params } } = this.props;
 
@@ -43,8 +43,6 @@ export default class CryptoNews extends Component {
 
     componentWillMount(){
         const { match: { params } } = this.props;
-
-        this.setState({subject: params.subject})
 
         axios.get(`${host}/api/news/${params.subject}`)
             .then((response) => {
@@ -71,7 +69,7 @@ export default class CryptoNews extends Component {
                 {...({ timeout: 750 })}
               > 
                     <div className='row mt-3'>
-                        {this.state.articles.map((articles, index) => < NewsCard key={index} articles={articles}/>)}
+                        {this.state.articles.map((articles, index) => < NewsCard key={index} height="25%" articles={articles}/>)}
                     </div>
                 </Fade>
             </Container>
