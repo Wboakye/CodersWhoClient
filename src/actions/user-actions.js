@@ -20,3 +20,10 @@ export function setSidebar(setSidebar) {
   }
 }
 
+export function setUser(setUser) {
+  return {
+    type: c.SET_USER,
+    setUser
+  }
+}
+

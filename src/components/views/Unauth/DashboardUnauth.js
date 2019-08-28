@@ -11,12 +11,7 @@ import NavBarUnauth from '../../navbars/NavBarUnauth';
 
 import { HomeUnauth } from './HomeUnauth';
 import NewsTicker from '../../NewsTicker'
-import CryptoNews from './NewsPages/CryptoNews'
-import BitcoinlNews from './NewsPages/Bitcoin'
-import DogecoinNews from './NewsPages/Dogecoin'
-import EthereumNews from './NewsPages/Ethereum'
-import LitecoinNews from './NewsPages/Litecoin'
-import RippleNews from './NewsPages/Ripple'
+import CryptoNews from './CryptoNews'
 
 import { ThemeProvider } from '@material-ui/styles';
 import IconButton from '@material-ui/core/IconButton';

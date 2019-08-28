@@ -30,11 +30,12 @@ class Main extends React.Component {
         }
     }
 
-    componentDidMount(){
-        socket.on('broadcast', function (data) {
-            console.log(data);
-        });
-    }
+    //CONSOLE LOGGED PRICE DATA
+    // componentDidMount(){
+    //     socket.on('broadcast', function (data) {
+    //         console.log(data);
+    //     });
+    // }
 
     componentWillUnmount(){
         socket.emit('end');

@@ -4,7 +4,9 @@ import history from '../history'
 
 import * as c from '../redux/constants'
 import store from '../redux/store'
+import { setUser } from './user-actions'
 
+const jwtDecode = require('jwt-decode')
 const host = 'http://localhost:3005';
 //const host = process.env.API_HOST;
 
@@ -23,7 +25,23 @@ export function login(username, password) {
         if(data.success === true){
           dispatch(setUserToken(data.token));
           dispatch(setLoginSuccess(true));
-          history.push('/user');
+          //GET PROFILE INFORMATION, STORE IN REDUX STORE
+          let token = sessionStorage.getItem('CWJWT');
+          let decodedToken = jwtDecode(token)
+              axios({
+                url: host + '/api/user/profile',
+                method: 'POST',
+                headers: {
+                  'auth-token': token,
+                },
+                data: { userID: decodedToken._id },
+              }).then( (response) => {
+                 store.dispatch(setUser(response.data.body));
+                 history.push('/user');
+              })
+              .catch(function (error) {
+                alert(error);
+              }); 
         }else{
           dispatch(setLoginError(data.message));
           alert(data.message);

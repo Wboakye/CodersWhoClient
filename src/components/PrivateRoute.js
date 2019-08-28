@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Redirect} from "react-router-dom"
 import store from '../redux/store'
 import axios from 'axios';
+import { setUser } from '../actions/user-actions'
+
+const jwtDecode = require('jwt-decode')
 
 const host = 'http://localhost:3005';
 
@@ -14,10 +17,29 @@ const PrivateRoute = ({component: Component, isAuthenticated, isLoading, ...rest
         isLoading: true
       });
 
+      const getUser = () => {
+        let token = sessionStorage.getItem('CWJWT');
+          let decodedToken = jwtDecode(token)
+              axios({
+                url: host + '/api/user/profile',
+                method: 'POST',
+                headers: {
+                  'auth-token': token,
+                },
+                data: { userID: decodedToken._id },
+              }).then( (response) => {
+                 store.dispatch(setUser(response.data.body));
+              })
+              .catch(function (error) {
+                alert(error);
+              }); 
+      }
+
       useEffect(() => {
         if(store.getState().auth.isLoginSuccess){
             setState({isAuthenticated: true, isLoading: false});
           }else{
+            //IF JWT AVAILABLE, VALIDATE
             if(sessionStorage.getItem('CWJWT')){
               let token = sessionStorage.getItem('CWJWT');
               axios({
@@ -27,6 +49,9 @@ const PrivateRoute = ({component: Component, isAuthenticated, isLoading, ...rest
                   'auth-token': token,
                 },
               }).then( (response) => {
+                if(response.data.success === true){
+                  getUser()
+                }                 
                   setState({...state, isAuthenticated: response.data.success});
                   setState({...state, isLoading: false});
               })
@@ -46,9 +71,6 @@ const PrivateRoute = ({component: Component, isAuthenticated, isLoading, ...rest
                 return <Redirect to="/login" />
             }
             return <Component {...rest} /> 
-
-
-
 } 
 
 export { PrivateRoute }

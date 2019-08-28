@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import NewsCard from '../../../NewsCard'
+import NewsCard from '../../NewsCard'
 import axios from 'axios';
 
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
-import '../../../componentsCSS/newsTicker.scss'
+import '../../componentsCSS/newsTicker.scss'
 
 import Fade from '@material-ui/core/Fade';
 

@@ -9,6 +9,12 @@ export class Home extends Component {
             <Container className="mt-3" component="main" maxWidth="xl">
 
                 <h1>HOMEPAGE</h1>
+                <h1>HOMEPAGE</h1>
+                <h1>HOMEPAGE</h1>
+                <h1>HOMEPAGE</h1>
+                <h1>HOMEPAGE</h1>
+                <h1>HOMEPAGE</h1>
+                <h1>HOMEPAGE</h1>
             </Container>
         )
     }
