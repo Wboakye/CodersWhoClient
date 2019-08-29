@@ -27,7 +27,7 @@ const host = 'http://localhost:3005'
 //const host = process.env.API_HOST;
 
 
-class SignUp extends React.Component {
+export class Register extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -128,9 +128,9 @@ class SignUp extends React.Component {
     this.checkExists(event)
   }
 
-  componentWillMount(){
-    this.props.verifyLoggedIn(true)
-  }
+  // componentWillMount(){
+  //   this.props.verifyLoggedIn(true)
+  // }
 
   render(){
     return (
@@ -284,4 +284,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

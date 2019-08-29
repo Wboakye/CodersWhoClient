@@ -20,6 +20,7 @@ import { faLock } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux'
 import { login, verifyLoggedIn } from '../../../actions/auth-actions';
 import { theme } from '../../theme'
+import store from '../../../redux/store'
 
 
 
@@ -43,12 +44,12 @@ export class Login extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     let { username, password } = this.state;
-    this.props.login(username, password);
+    store.dispatch(login(username, password));
   }
 
-  componentWillMount(){
-    this.props.verifyLoggedIn(true)
-  }
+  // componentWillMount(){
+  //   store.dispatch(verifyLoggedIn(true))
+  // }
 
   render(){
     let {isLoginPending, isLoginSuccess, loginError} = this.props;

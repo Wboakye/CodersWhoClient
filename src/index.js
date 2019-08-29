@@ -12,9 +12,8 @@ import io from 'socket.io-client'
 import { verifyLoggedIn } from './actions/auth-actions' 
 
 import Login from './components/views/Unauth/Login'
-import Register from './components/views/Unauth/Register'
 import Dashboard from './components/views/Auth/Dashboard'
-import DashboardUnauth from './components/views/Unauth/DashboardUnauth'
+import DashboardUnauth from './components/DashboardUnauth'
 
 import history from './history'
 
@@ -46,8 +45,7 @@ class Main extends React.Component {
         return(<Provider store={store}>
             <Router history={history}>
                 <Switch>
-                    <Route path="/login" component={Login} />
-                    <Route path="/register" component={Register} />
+
                     <PrivateRoute path="/user" component={Dashboard} />
                     <Route path="/" component={DashboardUnauth} />
                     <Route path="/*" component={() => 'NOT FOUND'} />

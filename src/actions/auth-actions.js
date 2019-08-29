@@ -34,13 +34,14 @@ export function login(username, password) {
                 headers: {
                   'auth-token': token,
                 },
-                data: { userID: decodedToken._id },
+                data: { userId: decodedToken._id },
               }).then( (response) => {
                  store.dispatch(setUser(response.data.body));
-                 history.push('/user');
+                 history.push('/home');
               })
               .catch(function (error) {
                 alert(error);
+                console.log('ERROR')
               }); 
         }else{
           dispatch(setLoginError(data.message));
@@ -74,7 +75,7 @@ export function setLogged(input){
 export function verifyLoggedIn(redirect){
   if(store.getState().auth.isLoginSuccess){
     if(redirect){
-          history.push('/user');
+          history.push('/home');
         }
     return true
   }else{
@@ -89,12 +90,13 @@ export function verifyLoggedIn(redirect){
       }).then( (response) => {
         store.dispatch(setLoginSuccess(true));
         if(redirect){
-          history.push('/user');
+          history.push('/home');
         }
         return true
       })
       .catch(function (error) {
         alert(error);
+        console.log('ERROR')
         return false
       });
     }else{

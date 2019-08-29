@@ -125,7 +125,7 @@ function Dashboard() {
                   <Home />
                     <Route path="/profile/:id" component={UserProfile} />
                     <Route exact path="/" component={Home} />
-                    <Route path="/*" component={() => 'NOT FOUND'} />
+                    {/* <Route path="/*" component={() => 'NOT FOUND'} /> */}
                 </Switch>
             </Router>
         </Provider>
