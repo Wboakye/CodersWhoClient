@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { ThemeProvider } from '@material-ui/styles';
-import NavBar from '../../navbars/NavBarCreds'
 
 import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
@@ -55,7 +54,6 @@ export class Login extends React.Component {
     let {isLoginPending, isLoginSuccess, loginError} = this.props;
     return (
       <div>
-        <NavBar />
       <Container component="main" maxWidth="xs">
         <ThemeProvider theme={theme}>
           <Box mt={3}>

@@ -5,15 +5,14 @@ import * as serviceWorker from './serviceWorker';
 import store from './redux/store.js';
 import { Router, Route, Switch } from 'react-router';
 import { Provider, connect } from 'react-redux';
-import {PrivateRoute} from './components/PrivateRoute'
+import {OpenRoute} from './components/OpenRoute'
 
 import io from 'socket.io-client'
 
 import { verifyLoggedIn } from './actions/auth-actions' 
 
 import Login from './components/views/Unauth/Login'
-import Dashboard from './components/views/Auth/Dashboard'
-import DashboardUnauth from './components/DashboardUnauth'
+import Dashboard from './components/Dashboard'
 
 import history from './history'
 
@@ -45,9 +44,7 @@ class Main extends React.Component {
         return(<Provider store={store}>
             <Router history={history}>
                 <Switch>
-
-                    <PrivateRoute path="/user" component={Dashboard} />
-                    <Route path="/" component={DashboardUnauth} />
+                    <OpenRoute path="/" component={Dashboard} />
                     <Route path="/*" component={() => 'NOT FOUND'} />
                 </Switch>
             </Router>

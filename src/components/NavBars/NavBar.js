@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { theme } from '../theme'
 import { ThemeProvider } from '@material-ui/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -8,6 +7,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
+import { theme } from '../theme'
 
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -66,6 +66,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
+
+
 export default function SearchAppBar(props) {
     const classes = useStyles();
 
@@ -73,11 +75,11 @@ export default function SearchAppBar(props) {
   return (
     <div className={classes.root}>
       <ThemeProvider theme={theme}>
-      <AppBar color="primary" position="static">
+      <AppBar color="primary" position="fixed">
         <Toolbar>
             < props.btn />
           <Typography className={classes.title} variant="h6" noWrap>
-            <div className='ml-3'><b>Digital Ticker</b></div>
+          < div className='ml-3'><b>Digital Ticker</b></div>
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>

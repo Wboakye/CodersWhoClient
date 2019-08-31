@@ -30,8 +30,6 @@ export default class CryptoNews extends Component {
                     fade: true,
                     articles: response.data.articles
                 });
-                console.log(response.data.articles)
-
             })
             .catch(function (error) {
                 // handle error

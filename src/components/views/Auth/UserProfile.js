@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
-import Container from '@material-ui/core/Container';
-import Paper from '@material-ui/core/Paper';
 import axios from 'axios'
+import { ThemeProvider } from '@material-ui/styles';
+import PostsCard from '../../PostsCard'
+import ProfileCard from '../../ProfileCard'
+
+
+
 const host = 'http://localhost:3005'
 
 
@@ -17,30 +21,39 @@ export default class UserProfile extends Component {
             groups: [],
             lastName: "",
             username: "",
-            _id: ""
+            _id: "",
+            posts: []
+
         }
     }
 
-    // componentDidUpdate(prevProps) {
-    //     const { match: { params } } = this.props;
+    componentDidUpdate(prevProps) {
+        const { match: { params } } = this.props;
 
-    //     console.log(`Params: ${params.userId}`)
+        console.log(`Params: ${params.userId}`)
 
-    //     if (prevProps.match.params !== params){
-    //       axios.post(`${host}/api/user/${params.userId}`)
-    //         .then((response) => {
-    //             // this.setState({
-            
-    //             // });
-    //             console.log(response.data)
-
-    //         })
-    //         .catch(function (error) {
-    //             // handle error
-    //             console.log(error);
-    //         })
-    //     }
-    //   }
+        if (prevProps.match.params !== params){
+          axios.post(`${host}/api/user/${params.userId}`)
+            .then((response) => {
+                let body = response.data.body
+                this.setState({
+                    _id: body._id,
+                    firstName: body.firstName,
+                    lastName: body.lastName,
+                    username: body.username, 
+                    following: body.following,
+                    followers: body.followers,
+                    groups: body.groups,
+                    email: body.email,
+                    posts: body.posts
+                });
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+        }
+      }
 
       componentDidMount() {
         const { match: { params } } = this.props;
@@ -59,10 +72,9 @@ export default class UserProfile extends Component {
                     following: body.following,
                     followers: body.followers,
                     groups: body.groups,
-                    email: body.email
+                    email: body.email,
+                    posts: body.posts
                 });
-                console.log(response.data)
-
             })
             .catch(function (error) {
                 // handle error
@@ -72,21 +84,19 @@ export default class UserProfile extends Component {
       }
       
     render() {
+        let name = `${this.state.firstName} ${this.state.lastName}`
         return (
-            <div>
-                <Container className="mt-3" component="main" maxWidth="xl">
-                 
-                        <h1>Profile Page</h1>
-                        <h1>Profile Page</h1>
-                        <h3>{this.state._id}</h3>
-                        <h3>{this.state.firstName}</h3>
-                        <h3>{this.state.lastName}</h3>
-                        <h3>{this.state.email}</h3>
-                        <h3>{this.state.followers}</h3>
-                        <h3>{this.state.following}</h3>
-                        <h3>{this.state.groups}</h3>
-                   
-                </Container>
+            <div className="my-3 my-md-5">
+                <div className="container">
+                <div className="row">
+                    <div className="col-lg-4">
+                        <ProfileCard user={this.state}/>                       
+                    </div>
+                    <div className="col-lg-8">
+                        {this.state.posts.map((post, index) => < PostsCard className="mb-3" key={index} height="25%" post={post}/>)}
+                    </div>
+                </div>
+                </div>
             </div>
         )
     }

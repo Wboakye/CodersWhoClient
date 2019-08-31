@@ -3,7 +3,6 @@ import axios from 'axios';
 
 import { ThemeProvider } from '@material-ui/styles';
 
-import NavBar from '../../navbars/NavBarCreds'
 import { theme } from '../../theme'
 
 import Fade from '@material-ui/core/Fade';
@@ -135,7 +134,6 @@ export class Register extends React.Component {
   render(){
     return (
       <div>
-        <NavBar />
         <Container component="main" maxWidth="sm">
           <ThemeProvider theme={theme}>
             <Box mt={3}>

@@ -59,7 +59,7 @@ export function logout(){
   return dispatch => {
     sessionStorage.removeItem('CWJWT');
     dispatch(setLoginSuccess(false));
-    history.push('/login');
+    history.push('/');
   }
 }
 
