@@ -45,7 +45,7 @@ const useStyles = makeStyles({
 
 
 //COMPONENT START 
-function DashboardUnauth() {
+function Dashboard() {
   const classes = useStyles();
   const [state, setState] = React.useState({
     left: false,
@@ -222,7 +222,7 @@ function DashboardUnauth() {
                     <Route exact path="/" component={HomeUnauth} />
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
-                    <PrivateRoute exact path="/home" component={Home} />
+                    <PrivateRoute path="/home" component={Home} />
                     <Route path="/profile/:userId" component={UserProfile} />
                     <Route path="/news/:subject" component={CryptoNews} />
                     <Route path="/*" component={() => 'NOT FOUND'} />
@@ -236,5 +236,5 @@ function DashboardUnauth() {
   );
 }
 
-export default withRouter(DashboardUnauth);
+export default withRouter(Dashboard);
 

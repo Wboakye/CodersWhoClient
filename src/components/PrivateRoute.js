@@ -18,6 +18,7 @@ const PrivateRoute = ({component: Component, isAuthenticated, isLoading, ...rest
         isLoading: true
       });
 
+      //GET USER INFO, SAVE IN STORE
       const getUser = () => {
         let token = sessionStorage.getItem('CWJWT');
           let decodedToken = jwtDecode(token)
@@ -38,55 +39,64 @@ const PrivateRoute = ({component: Component, isAuthenticated, isLoading, ...rest
               }); 
       }
 
-      useEffect((...rest) => {
+      const checkJwtAndValidate = (...rest) => {
+        if(sessionStorage.getItem('CWJWT')){
+          console.log('Has JWT Authenticating')
+          let token = sessionStorage.getItem('CWJWT');
+          axios({
+            url: host + '/api/user/authenticate',
+            method: 'POST',
+            headers: {
+              'auth-token': token,
+            },
+          }).then( (response) => {
+            console.log('Received response with JWT')
+            //IF AUTHENTICATED, GET AND STORE INFO
+            if(response.data.success === true){
+              getUser()
+            }
+              console.log('Got user, authentication')                 
+              setState({...state, isAuthenticated: response.data.success});
+              store.dispatch(setLogged(true));
+              console.log('set store auth complete')
+              setState({...state, isLoading: false});
+              return <Component {...rest} /> 
+          })
+          .catch(function (error) {
+            alert(error);
+            console.log('ERROR')
+
+            setState({isLoading: false});
+            return <Redirect to="/login" />
+          });
+        }else{
+          console.log('No JWT Not Authenticated')
+          setState({...state, isLoading: false });
+          return <Redirect to="/login" />
+        }
+      }
+
+      const validate = (...rest) => {
         //IF ALREADY AUTHENTICATED IN STORE, AUTHENTICATED
         if(store.getState().auth.isLoginSuccess){
-            console.log('State authed logged in.')
-            setState({isAuthenticated: true, isLoading: false});
-            return <Component {...rest} /> 
-          }else{
-            //IF JWT AVAILABLE, VALIDATE
-            if(sessionStorage.getItem('CWJWT')){
-              console.log('Has JWT Authenticating')
-              let token = sessionStorage.getItem('CWJWT');
-              axios({
-                url: host + '/api/user/authenticate',
-                method: 'POST',
-                headers: {
-                  'auth-token': token,
-                },
-              }).then( (response) => {
-                console.log('Received response with JWT')
-                if(response.data.success === true){
-                  getUser()
-                }
-                  console.log('Got user, authentication')                 
-                  setState({...state, isAuthenticated: response.data.success});
-                  store.dispatch(setLogged(true));
-                  console.log('set store auth complete')
-                  setState({...state, isLoading: false});
-                  return <Component {...rest} /> 
-              })
-              .catch(function (error) {
-                alert(error);
-                console.log('ERROR')
+          console.log('State authed logged in.')
+          setState({isAuthenticated: true, isLoading: false});
+          return <Component {...rest} /> 
+        }else{
+          //IF JWT AVAILABLE, VALIDATE
+          checkJwtAndValidate();
+        }
+      }
 
-                setState({isLoading: false});
-                return <Redirect to="/login" />
-              });
-            }else{
-              console.log('No JWT Not Authenticated')
-              setState({...state, isLoading: false });
-              return <Redirect to="/login" />
-            }
-          }
-      }, []);
+      useEffect((...rest) => {
+        validate(...rest);
+      },state, []);
 
            if(state.isLoading) {
             }
             if(!store.getState().auth.isLoginSuccess) {
                 console.log('auth returning to loggin')
-                //return <Redirect to="/login" />
+                return <Redirect to="/login" />
             }
             return <Component {...rest} /> 
 } 

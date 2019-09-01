@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { ThemeProvider } from '@material-ui/styles';
 import PostsCard from '../../PostsCard'
 import ProfileCard from '../../ProfileCard'
 
@@ -11,6 +10,7 @@ const host = 'http://localhost:3005'
 
 
 export default class UserProfile extends Component {
+    _isMounted = false;
     constructor(){
         super()
         this.state = {
@@ -56,6 +56,8 @@ export default class UserProfile extends Component {
     //   }
 
       componentDidMount() {
+        this._isMounted = true;
+
         const { match: { params } } = this.props;
 
         console.log(`Params Did Mount: ${params.userId}`)
@@ -64,25 +66,30 @@ export default class UserProfile extends Component {
         })
             .then((response) => {
                 console.log('Finished API Fetch')
-                let body = response.data.body
-                this.setState({
-                    _id: body._id,
-                    firstName: body.firstName,
-                    lastName: body.lastName,
-                    username: body.username, 
-                    following: body.following,
-                    followers: body.followers,
-                    groups: body.groups,
-                    email: body.email,
-                    posts: body.posts
-                });
-                console.log('updated state')
+                if (this._isMounted) {
+                    let body = response.data.body
+                    this.setState({
+                        _id: body._id,
+                        firstName: body.firstName,
+                        lastName: body.lastName,
+                        username: body.username, 
+                        following: body.following,
+                        followers: body.followers,
+                        groups: body.groups,
+                        email: body.email,
+                        posts: body.posts
+                    });
+                    console.log('updated state')
+                }
             })
             .catch(function (err) {
                 // handle error
                 console.log(`USER PROFILE ERROR: ${err}`);
             })
         
+      }
+      componentWillUnmount() {
+        this._isMounted = false;
       }
       
     render() {
