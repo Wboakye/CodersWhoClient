@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { ThemeProvider } from '@material-ui/styles';
+import NavBar from '../../navbars/NavBar'
 
 import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
