@@ -14,7 +14,7 @@ import { theme } from './theme'
 
 const useStyles = makeStyles({
   card: {
-    maxWidth: 345,
+    minWidth: 275,
   },
 });
 
@@ -45,12 +45,15 @@ export default function ProfileCard(props) {
                 across all continents except Antarctica
             </Typography>
             </CardContent>
-            <CardActions>
+            <CardActions className="justify-content-center">
                 <Button size="small" color="primary">
-                Share
+                Follow
                 </Button>
                 <Button size="small" color="primary">
-                Learn More
+                Message
+                </Button>
+                <Button size="small" color="primary">
+                Share
                 </Button>
             </CardActions>
             </Card>

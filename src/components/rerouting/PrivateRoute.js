@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Redirect} from "react-router-dom"
-import store from '../redux/store'
+import store from '../../redux/store'
 import axios from 'axios';
-import { setUser } from '../actions/user-actions'
-import { setLogged } from '../actions/auth-actions'
+import { setUser } from '../../actions/user-actions'
+import { setLogged } from '../../actions/auth-actions'
 
 const jwtDecode = require('jwt-decode')
 
@@ -34,14 +34,11 @@ const PrivateRoute = ({component: Component, isAuthenticated, isLoading, ...rest
               })
               .catch(function (error) {
                 alert(error);
-                console.log('ERROR')
-
               }); 
       }
 
       const checkJwtAndValidate = (...rest) => {
         if(sessionStorage.getItem('CWJWT')){
-          console.log('Has JWT Authenticating')
           let token = sessionStorage.getItem('CWJWT');
           axios({
             url: host + '/api/user/authenticate',
@@ -50,27 +47,22 @@ const PrivateRoute = ({component: Component, isAuthenticated, isLoading, ...rest
               'auth-token': token,
             },
           }).then( (response) => {
-            console.log('Received response with JWT')
             //IF AUTHENTICATED, GET AND STORE INFO
             if(response.data.success === true){
               getUser()
             }
-              console.log('Got user, authentication')                 
               setState({...state, isAuthenticated: response.data.success});
               store.dispatch(setLogged(true));
-              console.log('set store auth complete')
               setState({...state, isLoading: false});
               return <Component {...rest} /> 
           })
           .catch(function (error) {
             alert(error);
-            console.log('ERROR')
 
             setState({isLoading: false});
             return <Redirect to="/login" />
           });
         }else{
-          console.log('No JWT Not Authenticated')
           setState({...state, isLoading: false });
           return <Redirect to="/login" />
         }
@@ -79,7 +71,6 @@ const PrivateRoute = ({component: Component, isAuthenticated, isLoading, ...rest
       const validate = (...rest) => {
         //IF ALREADY AUTHENTICATED IN STORE, AUTHENTICATED
         if(store.getState().auth.isLoginSuccess){
-          console.log('State authed logged in.')
           setState({isAuthenticated: true, isLoading: false});
           return <Component {...rest} /> 
         }else{
@@ -95,7 +86,6 @@ const PrivateRoute = ({component: Component, isAuthenticated, isLoading, ...rest
            if(state.isLoading) {
             }
             if(!store.getState().auth.isLoginSuccess) {
-                console.log('auth returning to loggin')
                 return <Redirect to="/login" />
             }
             return <Component {...rest} /> 

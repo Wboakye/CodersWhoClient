@@ -8,17 +8,17 @@ import history from '../history';
 import { logout } from '../actions/auth-actions';
 
 import { theme } from './theme'
-import NavBar from './navbars/NavBar';
+import NavBar from './NavBar';
 
 import UserProfile from './views/Auth/UserProfile'
 import { HomeUnauth } from './views/Unauth/HomeUnauth';
 import { Home } from './views/Auth/Home'
-import NewsTicker from './NewsTicker'
 import CryptoNews from './views/Unauth/CryptoNews'
-import {PrivateRoute} from './PrivateRoute'
 import { Login } from './views/Unauth/Login'
 import { Register } from './views/Unauth/Register'
 
+import {PrivateRoute} from './rerouting/PrivateRoute'
+import {LogRegReroute} from './rerouting/LogRegReroute'
 
 
 import { ThemeProvider } from '@material-ui/styles';
@@ -220,8 +220,8 @@ function Dashboard() {
             <Router history={history}>
                 <Switch>
                     <Route exact path="/" component={HomeUnauth} />
-                    <Route path="/login" component={Login} />
-                    <Route path="/register" component={Register} />
+                    <LogRegReroute path="/login" component={Login} />
+                    <LogRegReroute path="/register" component={Register} />
                     <PrivateRoute path="/home" component={Home} />
                     <Route path="/profile/:userId" component={UserProfile} />
                     <Route path="/news/:subject" component={CryptoNews} />

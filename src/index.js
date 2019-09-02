@@ -5,8 +5,7 @@ import * as serviceWorker from './serviceWorker';
 import store from './redux/store.js';
 import { Router, Route, Switch } from 'react-router';
 import { Provider, connect } from 'react-redux';
-import {OpenRoute} from './components/OpenRoute'
-
+import { OpenRoute } from './components/rerouting/OpenRoute'
 import io from 'socket.io-client'
 
 import { verifyLoggedIn } from './actions/auth-actions' 

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import PostsCard from '../../PostsCard'
 import ProfileCard from '../../ProfileCard'
+import ProfileActions from '../../ProfileActions'
 
 
 
@@ -93,12 +94,18 @@ export default class UserProfile extends Component {
       }
       
     render() {
+        let actionsInfo = {
+            following: this.state.following,
+            followers: this.state.followers,
+            groups: this.state.groups
+        }
         return (
             <div className="my-3 my-md-5">
                 <div className="container">
                 <div className="row">
                     <div className="col-lg-4">
-                        <ProfileCard user={this.state}/>                       
+                        <ProfileCard user={this.state}/>
+                        <ProfileActions actionsInfo={actionsInfo}/>                       
                     </div>
                     <div className="col-lg-8">
                         {this.state.posts.map((post, index) => < PostsCard className="mb-3" key={index} height="25%" post={post}/>)}
