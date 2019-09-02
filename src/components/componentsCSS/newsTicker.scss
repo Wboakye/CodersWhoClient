@@ -1,4 +1,6 @@
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 $duration: 100s;
 
 @-webkit-keyframes ticker {
@@ -28,50 +30,48 @@ $duration: 100s;
 }
 
 .ticker-wrap {
-  
   position: fixed;
   bottom: 0;
   width: 100%;
   overflow: hidden;
   height: 2rem;
-  background-color: rgba(#000, 0.9); 
+  background-color: rgba(#000, 0.9);
   padding-left: 100%;
   box-sizing: content-box;
-  transform:translate(-50px);
+  transform: translate(-50px);
 
   .ticker {
-
     display: inline-block;
     height: 2rem;
-    line-height: 2rem;  
+    line-height: 2rem;
     white-space: nowrap;
     padding-right: 100%;
     box-sizing: content-box;
 
-    -webkit-animation-iteration-count: infinite; 
-            animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
-            animation-timing-function: linear;
-   -webkit-animation-name: ticker;
-           animation-name: ticker;
+    animation-timing-function: linear;
+    -webkit-animation-name: ticker;
+    animation-name: ticker;
     -webkit-animation-duration: $duration;
-            animation-duration: $duration;
+    animation-duration: $duration;
 
     &__item {
-
       display: inline-block;
 
       padding: 0 2rem;
       font-size: 1rem;
-      color: white;   
-
+      color: white;
     }
-
   }
-
 }
 
-
-
-body { padding-bottom: 5rem; }
-h1,h2,p {padding: 0 5%;}
+body {
+  padding-bottom: 5rem;
+}
+h1,
+h2,
+p {
+  padding: 0 5%;
+}

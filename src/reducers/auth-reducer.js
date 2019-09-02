@@ -1,11 +1,14 @@
-import * as c from '../redux/constants'
+import * as c from "../redux/constants";
 
-export default function reducer(state = {
-  isLoginSuccess: false,
-  isLoginPending: false,
-  loginError: null,
-  token: null,
-}, action) {
+export default function reducer(
+  state = {
+    isLoginSuccess: false,
+    isLoginPending: false,
+    loginError: null,
+    token: null
+  },
+  action
+) {
   switch (action.type) {
     case c.SET_LOGIN_PENDING:
       return Object.assign({}, state, {
@@ -22,7 +25,7 @@ export default function reducer(state = {
         loginError: action.loginError
       });
 
-      case c.SET_USER_TOKEN:
+    case c.SET_USER_TOKEN:
       return Object.assign({}, state, {
         token: action.token
       });

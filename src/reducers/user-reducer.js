@@ -1,11 +1,13 @@
-import * as c from '../redux/constants'
+import * as c from "../redux/constants";
 
-export default function reducer(state = {
+export default function reducer(
+  state = {
     userInfo: {},
     setSidebar: false
-}, action) {
+  },
+  action
+) {
   switch (action.type) {
-
     case c.SET_SIDEBAR:
       return Object.assign({}, state, {
         setSidebar: action.setSidebar
