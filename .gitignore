@@ -44,3 +44,5 @@ Thumbs.db
 .env.test.local
 .env.production.local
 
+#dependencies
+/node_modules

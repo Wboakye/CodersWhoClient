@@ -75,7 +75,7 @@ export default function SearchAppBar(props) {
             <props.btn />
             <Typography className={classes.title} variant="h6" noWrap>
               <div className="ml-3">
-                <b>Digital Ticker</b>
+                <b>codersWho</b>
               </div>
             </Typography>
             <div className={classes.search}>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -7,6 +8,7 @@ import CardActions from "@material-ui/core/CardActions";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
+import CardActionArea from "@material-ui/core/CardActionArea";
 
 import {
   faComment,
@@ -17,7 +19,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const useStyles = makeStyles(theme => ({
   card: {
-    minWidth: 275
+    minWidth: 275,
+    padding: "16px"
   },
   media: {
     height: 0,
@@ -40,9 +43,10 @@ const useStyles = makeStyles(theme => ({
 
 export default function PostsCard(props) {
   const classes = useStyles();
+  const post = `/post/${props.post._id}`;
   return (
     <div className="mb-3">
-      <Card className={classes.card}>
+      <Card button className={classes.card}>
         <CardHeader
           avatar={
             <Avatar aria-label="recipe" className={classes.avatar}>
@@ -51,25 +55,32 @@ export default function PostsCard(props) {
           }
           action={
             <IconButton aria-label="settings">
-              <FontAwesomeIcon size="lg" icon={faEllipsisV} />
+              <FontAwesomeIcon size="md" icon={faEllipsisV} />
             </IconButton>
           }
           title={props.post.title}
           subheader="September 14, 2016"
+          className="p-1"
         />
-        <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {props.post.subTitle}
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FontAwesomeIcon size="lg" icon={faHeart} />
-          </IconButton>
-          <IconButton aria-label="share">
-            <FontAwesomeIcon size="lg" icon={faComment} />
-          </IconButton>
-        </CardActions>
+        <Link to={post} style={{ textDecoration: "none", color: "black" }}>
+          <CardActionArea>
+            <CardContent className="p-1">
+              <Typography variant="body2" color="textSecondary" component="p">
+                {props.post.subTitle}
+              </Typography>
+            </CardContent>
+            <CardActions disableSpacing>
+              <IconButton className="p-0 mr-3" aria-label="add to favorites">
+                <FontAwesomeIcon size="sm" className="mr-1" icon={faHeart} />{" "}
+                {props.post.likes.length}
+              </IconButton>
+              <IconButton className="p-0" aria-label="share">
+                <FontAwesomeIcon className="mr-1" size="sm" icon={faComment} />{" "}
+                {props.post.comments.length}
+              </IconButton>
+            </CardActions>
+          </CardActionArea>
+        </Link>
       </Card>
     </div>
   );

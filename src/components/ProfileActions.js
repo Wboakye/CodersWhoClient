@@ -34,6 +34,7 @@ export default function ProfileActions(props) {
   const [header, setHeader] = React.useState("");
 
   const handleClickOpen = (text, header) => {
+    console.log(`${header}: ${text.length}`);
     setHeader(header);
     setText(text);
     setOpen(true);
@@ -174,12 +175,14 @@ export default function ProfileActions(props) {
           <DialogTitle id="scroll-dialog-title">{header}</DialogTitle>
           <DialogContent dividers={scroll === "paper"}>
             <DialogContentText>
-              {text.map((item, index) => (
-                <div key={index}>
-                  <div className="py-3">{item}</div>
-                  <Divider />
-                </div>
-              ))}
+              {text.length === 0
+                ? `None.`
+                : text.map((item, index) => (
+                    <div key={index}>
+                      <div className="py-3">{item}</div>
+                      <Divider />
+                    </div>
+                  ))}
             </DialogContentText>
           </DialogContent>
           <DialogActions>

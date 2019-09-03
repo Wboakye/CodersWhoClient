@@ -1,6 +1,7 @@
 import React from "react";
 
 import { ThemeProvider } from "@material-ui/styles";
+import { theme } from "../theme";
 
 import Fade from "@material-ui/core/Fade";
 import Paper from "@material-ui/core/Paper";
@@ -18,7 +19,6 @@ import { faLock } from "@fortawesome/free-solid-svg-icons";
 
 import { connect } from "react-redux";
 import { login, verifyLoggedIn } from "../../actions/auth-actions";
-import { theme } from "../theme";
 import store from "../../redux/store";
 
 export class Login extends React.Component {

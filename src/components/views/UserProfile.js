@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import store from "../../redux/store";
 import axios from "axios";
 import PostsCard from "../PostsCard";
 import ProfileCard from "../ProfileCard";
 import ProfileActions from "../ProfileActions";
+import Fade from "@material-ui/core/Fade";
 
 const host = "http://localhost:3005";
 
@@ -19,7 +21,8 @@ export default class UserProfile extends Component {
       lastName: "",
       username: "",
       _id: "",
-      posts: []
+      posts: [],
+      usersOwnProfile: false
     };
   }
 
@@ -58,7 +61,6 @@ export default class UserProfile extends Component {
       match: { params }
     } = this.props;
 
-    console.log(`Params Did Mount: ${params.userId}`);
     axios
       .post(`${host}/api/user/profile`, {
         userId: params.userId
@@ -78,7 +80,13 @@ export default class UserProfile extends Component {
             email: body.email,
             posts: body.posts
           });
+          if (this.state._id === store.getState().user.userInfo._id) {
+            this.setState({ usersOwnProfile: true });
+          }
           console.log("updated state");
+          console.log(`Stored ID? ${store.getState().user.userInfo._id}`);
+          console.log(`ID in State? ${this.state._id}`);
+          console.log(`User's Profile? ${this.state.usersOwnProfile}`);
         }
       })
       .catch(function(err) {
@@ -98,24 +106,26 @@ export default class UserProfile extends Component {
     };
     return (
       <div className="my-3 my-md-5">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-4">
-              <ProfileCard user={this.state} />
-              <ProfileActions actionsInfo={actionsInfo} />
-            </div>
-            <div className="col-lg-8">
-              {this.state.posts.map((post, index) => (
-                <PostsCard
-                  className="mb-3"
-                  key={index}
-                  height="25%"
-                  post={post}
-                />
-              ))}
+        <Fade in={true} {...{ timeout: 750 }}>
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-8">
+                {this.state.posts.map((post, index) => (
+                  <PostsCard
+                    className="mb-3"
+                    key={index}
+                    height="25%"
+                    post={post}
+                  />
+                ))}
+              </div>
+              <div className="col-lg-4">
+                <ProfileCard user={this.state} />
+                <ProfileActions actionsInfo={actionsInfo} />
+              </div>
             </div>
           </div>
-        </div>
+        </Fade>
       </div>
     );
   }
