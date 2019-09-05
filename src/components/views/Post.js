@@ -6,14 +6,17 @@ import TextField from "@material-ui/core/TextField";
 import { ThemeProvider } from "@material-ui/styles";
 import Button from "@material-ui/core/Button";
 
+import TextEditor from "../TextEditor";
+
+import "../componentsCSS/textEditor.css";
 import { theme } from "../theme";
 
 const host = "http://localhost:3005";
 
 export class Post extends Component {
   _isMounted = false;
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       likes: [],
       comments: [],
@@ -27,6 +30,7 @@ export class Post extends Component {
       username: "",
       date: ""
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   // componentDidUpdate(prevProps) {
@@ -56,6 +60,10 @@ export class Post extends Component {
   //         })
   //     }
   //   }
+
+  handleSubmit() {
+    this.refs.child.submit();
+  }
 
   componentDidMount() {
     this._isMounted = true;
@@ -92,6 +100,7 @@ export class Post extends Component {
         console.log(`POST ERROR: ${err}`);
       });
   }
+
   componentWillUnmount() {
     this._isMounted = false;
   }
@@ -116,22 +125,13 @@ export class Post extends Component {
                     </div>
                     <div>{this.state.description}</div>
                   </Paper>
-                  <Paper
-                    className="p-3 mb-3 text-right"
-                    style={{ minWidth: 275 }}
-                  >
-                    <TextField
-                      id="outlined-multiline-static"
-                      label="Write a comment."
-                      multiline
-                      rows="4"
-                      defaultValue=""
-                      margin="normal"
-                      variant="outlined"
-                      fullWidth={true}
+                  <Paper className="p-3 mb-3" style={{ minWidth: 275 }}>
+                    <TextEditor placeholder="Leave a comment..." ref="child" />
+                    <Button
+                      variant="contained"
                       color="secondary"
-                    />
-                    <Button variant="contained" color="secondary">
+                      onClick={this.handleSubmit}
+                    >
                       Post
                     </Button>
                   </Paper>
