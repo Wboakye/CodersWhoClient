@@ -1,4 +1,4 @@
 [build]
-base = "coderswhoclient/"
+base = "CodersWhoClient/"
 publish = "coderswhoclient/build/"
 command = "npm run build"
