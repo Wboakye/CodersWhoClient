@@ -1,5 +1,5 @@
 import React from "react";
-import { Editor, EditorState, RichUtils } from "draft-js";
+import { Editor, EditorState, RichUtils, ContentState } from "draft-js";
 import { stateToHTML } from "draft-js-export-html";
 
 export default class TextEditor extends React.Component {
@@ -14,12 +14,18 @@ export default class TextEditor extends React.Component {
     this.onTab = e => this._onTab(e);
     this.toggleBlockType = type => this._toggleBlockType(type);
     this.toggleInlineStyle = style => this._toggleInlineStyle(style);
+
+    this.submit = this.submit.bind(this);
   }
 
   submit() {
     let html = stateToHTML(this.state.editorState.getCurrentContent());
-    //this.state.editorState.getCurrentContent().getPlainText("\u0001")
-    console.log(html);
+    this.props.postNewComment(html);
+    const editorState = EditorState.push(
+      this.state.editorState,
+      ContentState.createFromText("")
+    );
+    this.setState({ editorState });
   }
 
   _handleKeyCommand(command) {
@@ -53,7 +59,7 @@ export default class TextEditor extends React.Component {
     // If the user changes block type before entering any text, we can
     // either style the placeholder or hide it. Let's just hide it now.
     let className = "RichEditor-editor";
-    var contentState = editorState.getCurrentContent();
+    let contentState = editorState.getCurrentContent();
     if (!contentState.hasText()) {
       if (
         contentState
@@ -171,7 +177,7 @@ const BlockStyleControls = props => {
   );
 };
 
-var INLINE_STYLES = [
+let INLINE_STYLES = [
   { label: "Bold", style: "BOLD" },
   { label: "Italic", style: "ITALIC" },
   { label: "Underline", style: "UNDERLINE" },
@@ -179,7 +185,7 @@ var INLINE_STYLES = [
 ];
 
 const InlineStyleControls = props => {
-  var currentStyle = props.editorState.getCurrentInlineStyle();
+  let currentStyle = props.editorState.getCurrentInlineStyle();
   return (
     <div className="RichEditor-controls">
       {INLINE_STYLES.map(type => (

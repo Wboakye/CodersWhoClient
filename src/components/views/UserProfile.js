@@ -6,7 +6,7 @@ import ProfileCard from "../ProfileCard";
 import ProfileActions from "../ProfileActions";
 import Fade from "@material-ui/core/Fade";
 
-const host = "http://localhost:3005";
+const host = process.env.REACT_APP_API_HOST;
 
 export default class UserProfile extends Component {
   _isMounted = false;
@@ -83,10 +83,6 @@ export default class UserProfile extends Component {
           if (this.state._id === store.getState().user.userInfo._id) {
             this.setState({ usersOwnProfile: true });
           }
-          console.log("updated state");
-          console.log(`Stored ID? ${store.getState().user.userInfo._id}`);
-          console.log(`ID in State? ${this.state._id}`);
-          console.log(`User's Profile? ${this.state.usersOwnProfile}`);
         }
       })
       .catch(function(err) {

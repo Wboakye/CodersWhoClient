@@ -8,7 +8,7 @@ import "../componentsCSS/newsTicker.scss";
 
 import Fade from "@material-ui/core/Fade";
 
-const host = "http://localhost:3005";
+const host = process.env.REACT_APP_API_HOST;
 
 export default class CryptoNews extends Component {
   constructor() {

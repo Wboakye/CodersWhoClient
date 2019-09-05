@@ -7,7 +7,7 @@ import store from "../redux/store";
 import { setUser } from "./user-actions";
 
 const jwtDecode = require("jwt-decode");
-const host = "http://localhost:3005";
+const host = process.env.REACT_APP_API_HOST;
 
 //LOGIN
 export function login(username, password) {

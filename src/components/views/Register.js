@@ -22,7 +22,7 @@ import { login, verifyLoggedIn } from "../../actions/auth-actions";
 
 require("dotenv/config");
 
-const host = "http://localhost:3005";
+const host = process.env.REACT_APP_API_HOST;
 //const host = process.env.API_HOST;
 
 export class Register extends React.Component {

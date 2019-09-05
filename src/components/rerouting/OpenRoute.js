@@ -6,7 +6,7 @@ import { setLogged } from "../../actions/auth-actions";
 
 const jwtDecode = require("jwt-decode");
 
-const host = "http://localhost:3005";
+const host = process.env.REACT_APP_API_HOST;
 
 const OpenRoute = ({
   component: Component,
@@ -20,8 +20,8 @@ const OpenRoute = ({
   });
 
   const getUser = () => {
-    let token = sessionStorage.getItem("CWJWT");
-    let decodedToken = jwtDecode(token);
+    const token = sessionStorage.getItem("CWJWT");
+    const decodedToken = jwtDecode(token);
     axios({
       url: host + "/api/user/profile",
       method: "POST",

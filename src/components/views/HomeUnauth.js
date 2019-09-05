@@ -5,7 +5,7 @@ import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import "../componentsCSS/newsTicker.scss";
 
-const host = "http://localhost:3005";
+const host = process.env.REACT_APP_API_HOST;
 
 export class HomeUnauth extends Component {
   constructor() {

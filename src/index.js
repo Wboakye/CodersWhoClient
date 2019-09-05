@@ -15,8 +15,10 @@ import Dashboard from "./components/Dashboard";
 
 import history from "./history";
 
+require("dotenv").config();
+
 let socket = io.connect("http://localhost:80");
-//const host = 'http://localhost:3005';
+//const host = process.env.REACT_APP_API_HOST;
 
 class Main extends React.Component {
   constructor() {
@@ -30,6 +32,10 @@ class Main extends React.Component {
   //         console.log(data);
   //     });
   // }
+
+  componentDidMount() {
+    console.log(process.env.REACT_APP_API_HOST);
+  }
 
   componentWillUnmount() {
     socket.emit("end");
