@@ -6,7 +6,6 @@ import store from "./redux/store.js";
 import { Router, Route, Switch } from "react-router";
 import { Provider, connect } from "react-redux";
 import { OpenRoute } from "./components/rerouting/OpenRoute";
-import io from "socket.io-client";
 
 import { verifyLoggedIn } from "./actions/auth-actions";
 
@@ -17,28 +16,14 @@ import history from "./history";
 
 require("dotenv").config();
 
-let socket = io.connect("http://localhost:80");
-//const host = process.env.REACT_APP_API_HOST;
-
 class Main extends React.Component {
   constructor() {
     super();
     this.state = {};
   }
 
-  //CONSOLE LOGGED PRICE DATA
-  // componentDidMount(){
-  //     socket.on('broadcast', function (data) {
-  //         console.log(data);
-  //     });
-  // }
-
   componentDidMount() {
     console.log(process.env.REACT_APP_API_HOST);
-  }
-
-  componentWillUnmount() {
-    socket.emit("end");
   }
 
   render() {
@@ -74,4 +59,17 @@ ReactDOM.render(
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
-//TODO: Get page auth working. Fix auth function in actions.
+//import io from "socket.io-client";
+//let socket = io.connect("http://localhost:80");
+//const host = process.env.REACT_APP_API_HOST;
+
+//CONSOLE LOGGED PRICE DATA
+// componentDidMount(){
+//     socket.on('broadcast', function (data) {
+//         console.log(data);
+//     });
+// }
+
+// componentWillUnmount() {
+//   socket.emit("end");
+// }

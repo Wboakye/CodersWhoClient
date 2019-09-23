@@ -18,7 +18,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 
 import { connect } from "react-redux";
-import { login, verifyLoggedIn } from "../../actions/auth-actions";
+import { register, verifyLoggedIn } from "../../actions/auth-actions";
+import store from "../../redux/store";
 
 require("dotenv/config");
 
@@ -135,6 +136,30 @@ export class Register extends React.Component {
   handleEmail = event => {
     this.validate(event);
     this.checkExists(event);
+  };
+
+  handleSubmit = e => {
+    if (
+      !this.usernameExists &&
+      !this.emailExists &&
+      !this.emailError &&
+      !this.usernameError &&
+      !this.password1Error &&
+      !this.password2Error
+    ) {
+      let userInfo = {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        username: this.username,
+        email: this.email,
+        password: this.password2
+      };
+
+      store.dispatch(register(userInfo));
+    } else {
+      console.log("Information incorrect");
+    }
+    e.preventDefault();
   };
 
   // componentWillMount(){
@@ -267,6 +292,16 @@ export class Register extends React.Component {
                     >
                       Sign Up
                     </Button>
+                    <Link href="/">
+                      <Button
+                        className="mt-1"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                      >
+                        Cancel
+                      </Button>
+                    </Link>
                     <Grid container justify="flex-end">
                       <Grid item className="mt-1">
                         <Link href="/login" variant="body2">
@@ -295,7 +330,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    login: (username, password) => dispatch(login(username, password)),
+    register: (username, password) => dispatch(register(username, password)),
     verifyLoggedIn
   };
 };

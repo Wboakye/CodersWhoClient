@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
+import store from "../redux/store";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
@@ -16,6 +17,11 @@ import {
   faEllipsisV
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+const jwtDecode = require("jwt-decode");
+const token = sessionStorage.getItem("CWJWT");
+const decodedToken = jwtDecode(token);
+const id = decodedToken._id;
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -42,6 +48,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function PostsCard(props) {
+  const [isOwnPost, setIsOwnPost] = useState(false);
+
+  useEffect(() => {
+    if (props.post.userId === id) {
+      setIsOwnPost(true);
+    }
+  });
+
   const classes = useStyles();
   const post = `/post/${props.post._id}`;
   return (
@@ -54,9 +68,13 @@ export default function PostsCard(props) {
             </Avatar>
           }
           action={
-            <IconButton aria-label="settings">
-              <FontAwesomeIcon size="md" icon={faEllipsisV} />
-            </IconButton>
+            isOwnPost ? (
+              <IconButton aria-label="settings">
+                <FontAwesomeIcon size="md" icon={faEllipsisV} />
+              </IconButton>
+            ) : (
+              <div></div>
+            )
           }
           title={props.post.title}
           subheader="September 14, 2016"
@@ -67,6 +85,7 @@ export default function PostsCard(props) {
             <CardContent className="p-1">
               <Typography variant="body2" color="textSecondary" component="p">
                 {props.post.subTitle}
+                {isOwnPost}
               </Typography>
             </CardContent>
             <CardActions disableSpacing>
