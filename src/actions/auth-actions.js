@@ -6,7 +6,7 @@ import * as c from "../redux/constants";
 import store from "../redux/store";
 import { setUser } from "./user-actions";
 
-const jwtDecode = require("jwt-decode");
+import * as jwtDecode from "jwt-decode";
 const host = process.env.REACT_APP_API_HOST;
 
 //LOGIN
