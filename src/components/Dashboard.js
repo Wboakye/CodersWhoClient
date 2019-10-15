@@ -13,6 +13,7 @@ import NavBar from "./NavBar";
 import UserProfile from "./views/UserProfile";
 import { HomeUnauth } from "./views/HomeUnauth";
 import { Home } from "./views/Home";
+import CryptoNews from "./views/CryptoNews";
 import { Login } from "./views/Login";
 import { Register } from "./views/Register";
 import { Post } from "./views/Post";
@@ -112,6 +113,76 @@ function Dashboard() {
           </ListItem>
         </Link>
         <Divider />
+        <ListItem>
+          <ListItemText primary={<b>News</b>} />
+        </ListItem>
+        <Divider />
+        <Link
+          to="/news/general"
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <ListItem button>
+            <ListItemIcon>
+              <FontAwesomeIcon icon={faSearchDollar} />
+            </ListItemIcon>
+            <ListItemText primary={"Crypto"} />
+          </ListItem>
+        </Link>
+        <Link
+          to="/news/bitcoin"
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <ListItem button>
+            <ListItemIcon>
+              <FontAwesomeIcon icon={faSearchDollar} />
+            </ListItemIcon>
+            <ListItemText primary={"Bitcoin"} />
+          </ListItem>
+        </Link>
+        <Link
+          to="/news/dogecoin"
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <ListItem button>
+            <ListItemIcon>
+              <FontAwesomeIcon icon={faSearchDollar} />
+            </ListItemIcon>
+            <ListItemText primary={"Dogecoin"} />
+          </ListItem>
+        </Link>
+        <Link
+          to="/news/ethereum"
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <ListItem button>
+            <ListItemIcon>
+              <FontAwesomeIcon icon={faSearchDollar} />
+            </ListItemIcon>
+            <ListItemText primary={"Ethereum"} />
+          </ListItem>
+        </Link>
+        <Link
+          to="/news/litecoin"
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <ListItem button>
+            <ListItemIcon>
+              <FontAwesomeIcon icon={faSearchDollar} />
+            </ListItemIcon>
+            <ListItemText primary={"Litecoin"} />
+          </ListItem>
+        </Link>
+        <Link
+          to="/news/ripple"
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <ListItem button>
+            <ListItemIcon>
+              <FontAwesomeIcon icon={faSearchDollar} />
+            </ListItemIcon>
+            <ListItemText primary={"Ripple"} />
+          </ListItem>
+        </Link>
       </List>
       <Divider />
     </div>
@@ -214,6 +285,7 @@ function Dashboard() {
                 <PrivateRoute path="/home" component={Home} />
                 <Route path="/profile/:userId" component={UserProfile} />
                 <Route path="/post/:postId" component={Post} />
+                <Route path="/news/:subject" component={CryptoNews} />
                 <Route path="/*" component={() => "NOT FOUND"} />
               </Switch>
             </Router>

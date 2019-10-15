@@ -7,7 +7,6 @@ import { ThemeProvider } from "@material-ui/styles";
 import Button from "@material-ui/core/Button";
 
 import PostComment from "../PostComment";
-import ProfileCard from "../ProfileCard";
 
 import store from "../../redux/store";
 import TextEditor from "../TextEditor";
@@ -140,12 +139,6 @@ export class Post extends Component {
   }
 
   render() {
-    let profileCardInfo = {
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      username: this.state.username,
-      userId: this.state.userId
-    };
     return (
       <div className="my-3 my-md-5">
         <ThemeProvider theme={theme}>
@@ -183,9 +176,7 @@ export class Post extends Component {
                     <PostComment comment={comment} key={index} />
                   ))}
                 </div>
-                <div className="col-lg-4">
-                  <ProfileCard user={profileCardInfo} />
-                </div>
+                <div className="col-lg-4">USER INFO</div>
               </div>
             </div>
           </Fade>

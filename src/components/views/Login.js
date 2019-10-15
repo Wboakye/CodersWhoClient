@@ -109,16 +109,6 @@ export class Login extends React.Component {
                     >
                       Sign In
                     </Button>
-                    <Link href="/">
-                      <Button
-                        className="mt-1"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                      >
-                        Cancel
-                      </Button>
-                    </Link>
                     <Grid container>
                       {/* <Grid item xs>
                       <Link href="#" variant="body2">

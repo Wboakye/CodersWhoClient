@@ -1,9 +1,4 @@
 [build]
-<<<<<<< HEAD
 base = "CodersWhoClient/"
-publish = "CodersWhoClient/build/"
-=======
-base = "coderswhoclient/"
 publish = "coderswhoclient/build/"
->>>>>>> parent of aab99f2c... netlify
 command = "npm run build"
